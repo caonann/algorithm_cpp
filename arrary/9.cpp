@@ -17,6 +17,7 @@ class Solution {
 public:
     // 已知ABC < target, 新增一位X变成ABCX, 若ABCX < target 则新增的subarray中必须满足 1.连续 2.包含X
     // 所以从X向左数: X, CX, BCX, ABCX
+    // 这种基于双指针索引的方法只适用于正整数，有正有负不适用
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
         int j = 0;
         long sum = 1;
