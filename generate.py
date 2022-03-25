@@ -39,6 +39,7 @@ def generate_cpp_file(filename):
 */
 #include <iostream>
 #include <assert.h>
+#include <stdio.h>
 #include <vector>
 #include <map>
 #include <algorithm>
