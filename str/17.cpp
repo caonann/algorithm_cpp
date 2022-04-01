@@ -2,7 +2,7 @@
  @filename   17.cpp
  @author     caonan
  @date       2022-03-29 15:09:16
- @reference  https://leetcode-cn.com/problems/M1oyTv/   
+ @reference  剑指offer专项   
  @url      https://leetcode-cn.com/problems/M1oyTv/
  @brief     给定两个字符串 s 和 t 。返回 s 中包含 t 的所有字符的最短子字符串。如果 s 中不存在符合条件的子字符串，则返回空字符串 "" 。
             如果 s 中存在多个符合条件的子字符串，返回任意一个。
@@ -19,7 +19,6 @@ using namespace std;
 
 class Solution {
 public:
-    //O(s.len*t.len)
     string minWindow(string s, string t) {
         unordered_map<char,int> map_store;
         for(auto c:t){
@@ -53,6 +52,28 @@ public:
         }
         return shortest_str;
     }
+
+    string minWindow1(string s, string t) {
+        unordered_map<char,int> hs,ht;
+        for(const auto& c:t) ht[c]++;
+        int left=0,cnt=0;
+        string ans;
+        for(int right=0;right<s.size();right++){
+            hs[s[right]]++;
+            if(hs[s[right]] <= ht[s[right]]) cnt++; //统计有效字符窗口长度
+            while(hs[s[left]] > ht[s[left]]){       //右移左边界
+                hs[s[left]]--;
+                left++;
+            }         
+
+            if(cnt == t.length()){
+                if(ans.empty()||ans.length()> right-left+1){
+                    ans = s.substr(left,right-left+1);
+                }
+            }
+        }
+        return ans;
+    }
 };
 
 int main(){
@@ -60,5 +81,9 @@ int main(){
     assert(s.minWindow("ADOBECODEBANC","ABC") == "BANC");
     assert(s.minWindow("a","a") == "a");
     assert(s.minWindow("a","aa") == "");
+
+    assert(s.minWindow1("ADOBECODEBANC","ABC") == "BANC");
+    assert(s.minWindow1("a","a") == "a");
+    assert(s.minWindow1("a","aa") == "");
     return 0;
 }
