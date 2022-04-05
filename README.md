@@ -15,7 +15,7 @@ https://www.nowcoder.com/exam/oj/ta?tpId=101
 docker build -t alguint .
 
 ### 总体顺序
-质量流，重视每一道题的归纳总结，形成长期记忆
+质量流，重视每一道题的归纳总结，形成长期记忆，每个类下都要熟悉要对应stl的标准库使用方法
 
 sword2->niuke->niuke进阶->程序员代码面试指南->程序员面试金典->leetcode专项分类500+
 

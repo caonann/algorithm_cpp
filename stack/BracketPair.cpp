@@ -22,7 +22,7 @@ bool vailidBracketPair(string s){
     map<char,char> diff{{']','['},{')','('},{'}','{'}};
     for(auto c:s){
         if(c == '{' or c == '(' or c == '['){
-            //todo: 如果符号更多就没法搞了，得自定义个比较运算函数
+            //如果符号更多就没法搞了，得自定义个比较运算函数,下面的函数是针对这种情况做的优化
             if(!t.empty() && (t.top() == '('&& c!='(' || t.top() == '[' && c=='{')){
                 return false;
             }
