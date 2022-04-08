@@ -15,11 +15,11 @@
 
 class TreePrinter
 {
-public:
-    vector<vector<int> > printTree(TreeNode *root)
+   public:
+    vector<vector<int>> printTree(TreeNode *root)
     {
         // write code here
-        if (!root) return vector<vector<int>> {};
+        if (!root) return vector<vector<int>>{};
         TreeNode *last = root;
         TreeNode *nlast = last;
 
@@ -30,25 +30,21 @@ public:
 
         binary_que.push(root);
 
-        while (!binary_que.empty())
-        {
+        while (!binary_que.empty()) {
             TreeNode *node = binary_que.front();
             line.push_back(node->val);
 
-            if (node->left)
-            {
+            if (node->left) {
                 nlast = node->left;
                 binary_que.push(node->left);
             }
 
-            if (node->right)
-            {
+            if (node->right) {
                 nlast = node->right;
                 binary_que.push(node->right);
             }
 
-            if (node == last)
-            {
+            if (node == last) {
                 last = nlast;
                 res.push_back(line);
                 line.clear();
@@ -61,7 +57,6 @@ public:
     }
 };
 
-
 int main()
 {
     std::random_device rd;
@@ -69,8 +64,7 @@ int main()
     std::uniform_int_distribution<unsigned> u(0, 100);
     vector<int> tree_list;
 
-    for (int i = 0; i < 100; i++)
-    {
+    for (int i = 0; i < 100; i++) {
         tree_list.push_back(u(e));
     }
 
@@ -78,10 +72,8 @@ int main()
     TreePrinter t;
     vector<vector<int>> ret = t.printTree(root);
 
-    for (auto line : ret)
-    {
-        for (auto i : line)
-        {
+    for (auto line : ret) {
+        for (auto i : line) {
             cout << i << " ";
         }
 
@@ -90,4 +82,3 @@ int main()
 
     return 0;
 }
-

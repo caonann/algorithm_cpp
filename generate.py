@@ -37,12 +37,13 @@ def generate_cpp_file(filename):
  @url      
  @brief  
 */
-#include <iostream>
 #include <assert.h>
 #include <stdio.h>
-#include <vector>
-#include <map>
+
 #include <algorithm>
+#include <iostream>
+#include <map>
+#include <vector>
 using namespace std;
 
 int main(){{

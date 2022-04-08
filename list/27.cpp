@@ -69,6 +69,29 @@ class Solution
     }
 };
 
+class Solution1 : public Solution
+{
+   public:
+    //用快慢指针找到链表的中间节点，然后反转比较
+    bool isPalindrome(ListNode *head)
+    {
+        ListNode dummy(-1, head);
+        ListNode *fast = &dummy, *slow = &dummy;
+        while (fast && fast->next) {
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        auto p = reverseList(slow->next);
+        slow->next = nullptr;
+        while (head && p) {
+            if (head->val != p->val) return false;
+            head = head->next;
+            p = p->next;
+        }
+        return true;
+    }
+};
+
 ListNode *createPalindromeList(vector<int> arr, bool odd)
 {
     ListNode dummy(-1);
@@ -115,7 +138,7 @@ void uint_test(vector<int> arr, bool odd)
     cout << "----------test times " << test_times++ << "----------" << endl;
     auto p = createPalindromeList(arr, odd);
     printNodeList(p);
-    Solution s;
+    Solution1 s;
     assert(s.isPalindrome(p));
 }
 
@@ -125,7 +148,7 @@ void uint_test_false(vector<int> arr)
     cout << "----------test times " << test_times++ << "----------" << endl;
     auto p = createRandomList(arr);
     printNodeList(p);
-    Solution s;
+    Solution1 s;
     assert(!s.isPalindrome(p));
 }
 
@@ -133,6 +156,7 @@ int main()
 {
     uint_test(vector<int>{1, 2, 3, 4}, true);
     uint_test(vector<int>{1, 2, 3, 4}, false);
+    uint_test(vector<int>{1}, true);
     uint_test_false(vector<int>{1, 2, 3, 4, 5, 6, 7, 8});
     uint_test_false(vector<int>{1, 2});
     return 0;
