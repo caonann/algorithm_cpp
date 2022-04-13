@@ -8,6 +8,7 @@
 #ifndef _COMMON_DEFINE_H
 #define _COMMON_DEFINE_H
 #include <assert.h>
+#include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -38,15 +39,15 @@ struct TreeNode {
 
 namespace comm
 {
-int *bubbleSort(int *A, int n);
+
 TreeNode *createTree(std::vector<int> &arr);
 }  // namespace comm
 
 class RandomUtils
 {
    public:
-    static int getInt(int start = 10, int end = 1000);
-    static double getDouble(double start = 10, double end = 1000);
+    static int getInt(int start = 0, int end = INT_MAX);
+    static double getDouble(double start = 0, double end = INT_MAX);
 };
 namespace
 {

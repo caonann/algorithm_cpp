@@ -115,7 +115,7 @@ class LRUCache
  * obj->put(key,value);
  */
 
-//todo: 如果用智能指针实现链表呢？
+//todo: 如果用智能指针实现链表？
 void uinttest_lrucache(int capacity)
 {
     LRUCache cache(capacity);
