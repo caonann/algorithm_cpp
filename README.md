@@ -11,6 +11,8 @@ https://leetcode-cn.com/problem-list/xb9lfcwi/
 程序员代码面试指南
 https://www.nowcoder.com/exam/oj/ta?tpId=101
 
+找对应公司的题库刷，主刷mid，熟悉常用数据结构和算法
+https://codetop.cc/home
 ### 构建docker镜像
 docker build -t alguint .
 

@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <iostream>
 #include <map>
+#include <unordered_map>
 #include <vector>
 using namespace std;
 
@@ -39,7 +40,21 @@ class Solution1 : public Solution
 {
    public:
     //前缀和
-    int subarraySum(vector<int>& nums, int k) {}
+    int subarraySum(vector<int>& nums, int k)
+    {
+        unordered_map<int, int> count_map;
+        int pre = 0;
+        int count = 0;
+        count_map[0] = 1;
+        for (int i = 0; i < nums.size(); i++) {
+            pre += nums[i];
+            if (count_map.find(pre - k) != count_map.end()) {
+                count += count_map[pre - k];
+            }
+            count_map[pre]++;
+        }
+        return count;
+    }
 };
 
 void uinttest(vector<int> arr, int k, int expect)
