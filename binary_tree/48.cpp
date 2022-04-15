@@ -38,47 +38,52 @@ class Codec
         return s;
     }
 
+    //来一个数字或#优先挂parent左节点，左节点不让挂就挂右节点，左右都挂则pop
+    //不能用left,right指针因为即使通过#判断节点为空了，再去用来判断还是无法区分是否可以挂节点
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data)
     {
-        if (data[0] == '#') return nullptr;
-        string num;
-        stack<TreeNode*> tree_stack;
         TreeNode* root = nullptr;
+        if (data[0] == '#') return root;
+        string num;
+        struct WrapTreeNode {
+            WrapTreeNode(int val) : node_ptr(new TreeNode(val)) {}
+            TreeNode* node_ptr = nullptr;
+            bool left_available = true;
+            bool right_available = true;
+        };
+        stack<WrapTreeNode> tree_stack;
         for (int i = 0; i < data.length(); i++) {
             if (data[i] == '#') {
-                if (i + 1 < data.length() && data[i + 1] == '#') {
-                    tree_stack.pop();
-                    ++i;
-                } else if (tree_stack.top()->left) {
+                auto& parent = tree_stack.top();
+                if (parent.left_available) {
+                    parent.left_available = false;
+                } else {
                     tree_stack.pop();
                 }
             } else if (data[i] == ',') {
                 int inum = stoi(num);
                 num.clear();
-                TreeNode* node = new TreeNode(inum);
+                WrapTreeNode node(inum);
+                if (tree_stack.empty()) root = node.node_ptr;
                 while (!tree_stack.empty()) {
-                    auto node_top = tree_stack.top();
-                    if (node_top->left && node_top->right) {
+                    auto& parent = tree_stack.top();
+                    if (parent.left_available) {
+                        parent.left_available = false;
+                        parent.node_ptr->left = node.node_ptr;
+                        break;
+                    } else if (parent.right_available) {
+                        parent.node_ptr->right = node.node_ptr;
                         tree_stack.pop();
-                        continue;
+                        break;
+                    } else {
+                        tree_stack.pop();
                     }
-                    if (!node_top->left)
-                        node_top->left = node;
-                    else if (!node_top->right)
-                        node_top->right = node;
-                    break;
                 }
-                if (!root) root = node;
-                tree_stack.push(node);
+                tree_stack.emplace(node);
             } else {
                 num += data[i];
             }
-        }
-
-        while (!tree_stack.empty()) {
-            root = tree_stack.top();
-            tree_stack.pop();
         }
         return root;
     }
@@ -97,14 +102,58 @@ class Codec
     }
 };
 
+//用前序和中序来构建二叉树
+class Codec1 : public Codec
+{
+    string serialize(TreeNode* root) { return ""; }
+    TreeNode* deserialize(string data) { return nullptr; }
+};
+
+//采用递归方法，代码少的多..
+class Codec2 : public Codec
+{
+   public:
+    string serialize(TreeNode* root)
+    {
+        if (!root) return "#";
+        string s;
+        s += to_string(root->val) + "," + serialize(root->left);
+        s += serialize(root->right);
+        return s;
+    }
+    TreeNode* deserialize(string data)
+    {
+        int index = 0;
+        return dfs(data, index);
+    }
+
+   private:
+    TreeNode* dfs(string& s, int& i)
+    {
+        if (s[i] == '#') {
+            ++i;
+            return nullptr;
+        }
+        int len = i;
+        while (s[len++] != ',');
+        int inum = stoi(s.substr(i, len - i - 1));
+        i = len;
+        TreeNode* root = new TreeNode(inum);
+        root->left = dfs(s, i);
+        root->right = dfs(s, i);
+        return root;
+    }
+};
 // Your Codec object will be instantiated and called as such:
 // Codec ser, deser;
 // TreeNode* ans = deser.deserialize(ser.serialize(root));
 int main()
 {
-    Traversal t(1);
+    Traversal t(10);
     auto root = t.getRoot();
-    Codec c;
+    Codec c1;
+    Codec2 c;
+    assert(c1.serialize(root) == c.serialize(root));
     string s = c.serialize(root);
     cout << "serialize " << s << endl;
     auto node = c.deserialize(s);

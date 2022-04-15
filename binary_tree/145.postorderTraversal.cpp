@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <iostream>
 #include <map>
+#include <stack>
 #include <vector>
 
 #include "traverse.h"
@@ -28,6 +29,36 @@ struct TreeNode {
 };
 
 class Solution
+{
+   public:
+    //非递归版 时间o(n) 空间o(n)
+    vector<int> postorderTraversal(TreeNode *root)
+    {
+        auto cur = root;
+        TreeNode *pre = nullptr;
+        stack<TreeNode *> tree_stack;
+        vector<int> ans;
+        while (cur || !tree_stack.empty()) {
+            while (cur) {
+                tree_stack.push(cur);
+                cur = cur->left;
+            }
+            cur = tree_stack.top();
+            if (cur->right != pre && cur->right) {
+                cur = cur->right;
+            } else {
+                ans.push_back(cur->val);
+                pre = cur;
+                cur = nullptr;
+                tree_stack.pop();
+            }
+        }
+        return ans;
+    }
+};
+
+// todo:还有一种空间只要o(1)的
+class Solution1 : Solution
 {
    public:
     vector<int> postorderTraversal(TreeNode *root) {}

@@ -18,6 +18,8 @@
 #include <stack>
 #include <vector>
 using namespace std;
+namespace tree_util
+{
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -28,8 +30,7 @@ struct TreeNode {
 };
 
 //这里先只以节点val为int类型的二叉树为例子，按照遍历顺序输出arr数组
-namespace tree_util
-{
+
 class Traversal
 {
    public:
@@ -43,18 +44,18 @@ class Traversal
         bfs
     };
     // default create increasing complete binary tree
-    explicit Traversal(int node_count)
+    explicit Traversal(int node_count, int begin = 0)
     {
         assert(node_count >= 0);
         if (!node_count) return;
-        root_ = new TreeNode(0);
+        root_ = new TreeNode(begin);
         queue<TreeNode*> tree_queue;
         tree_queue.push(root_);
-        for (int i = 1; i < node_count; i += 2) {
+        for (int i = begin + 1; i < begin + node_count; i += 2) {
             auto node = tree_queue.front();
             node->left = new TreeNode(i);
             tree_queue.push(node->left);
-            if (i + 1 < node_count) {
+            if (i + 1 < begin + node_count) {
                 node->right = new TreeNode(i + 1);
                 tree_queue.push(node->right);
             }
