@@ -62,7 +62,14 @@ class Traversal
             tree_queue.pop();
         }
     }
-    explicit Traversal(const vector<int>& node_val_arr) { return; }
+    // preorder string ,null with'#' number split with ','
+    //example:10,9,##20,15,##7,
+    explicit Traversal(const std::string s)
+    {
+        int i = 0;
+        root_ = dfs(s, i);
+    }
+
     ~Traversal()
     {
         if (!root_) return;
@@ -245,6 +252,22 @@ class Traversal
             dfs(node->right, ans_arr, type);
             if (type == postorder) ans_arr.push_back(node->val);
         }
+    }
+
+    TreeNode* dfs(const string& s, int& i)
+    {
+        if (s[i] == '#') {
+            ++i;
+            return nullptr;
+        }
+        int len = i;
+        while (s[len++] != ',');
+        int inum = stoi(s.substr(i, len - i - 1));
+        i = len;
+        TreeNode* root = new TreeNode(inum);
+        root->left = dfs(s, i);
+        root->right = dfs(s, i);
+        return root;
     }
 
    private:
