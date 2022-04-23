@@ -18,18 +18,15 @@
 using namespace std;
 int *insertionSort(int *A, int n)
 {
-    if (n <= 0)
-    {
+    if (n <= 0) {
         return NULL;
     }
 
-    for (int i = 1; i < n; i++)
-    {
+    for (int i = 1; i < n; i++) {
         int ipre = i - 1;
         int mark = A[i];
 
-        while (ipre >= 0 && A[ipre] > mark)
-        {
+        while (ipre >= 0 && A[ipre] > mark) {
             A[ipre + 1] = A[ipre];
             ipre--;
         }
@@ -45,11 +42,9 @@ int main()
     int arr[] = {1, 3, 5, 4, 8, 0, 9};
     insertionSort(arr, sizeof(arr) / sizeof(int));
 
-    for (int i = 0; i < sizeof(arr) / sizeof(int); i++)
-    {
+    for (int i = 0; i < sizeof(arr) / sizeof(int); i++) {
         cout << arr[i] << endl;
     }
 
     return 0;
 }
-

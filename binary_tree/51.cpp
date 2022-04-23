@@ -50,7 +50,7 @@ class Solution
 
 int main()
 {
-    Traversal t("-10,9,##20,15,##7,##");
+    Traversal t(10);
     // t.show_graph_current_tree();
     // t.show_val_order(Traversal::preorder);
     auto root = t.getRoot();

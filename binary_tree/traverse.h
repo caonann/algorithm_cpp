@@ -84,6 +84,10 @@ class Traversal
         }
     }
 
+    void set_search_balance(){
+        
+    }
+
     void show_graph_current_tree(TreeNode* head = nullptr)
     {
         cout << "----------show_graph_current_tree----------" << endl;
