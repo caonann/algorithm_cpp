@@ -14,8 +14,9 @@
     > Created Time: Sat 28 Oct 2017 12:29:51 PM CST
  ************************************************************************/
 
-#include <iostream>
 #include <stdio.h>
+
+#include <iostream>
 using namespace std;
 
 void merge(int *arr, int index_low, int index_high)
@@ -27,35 +28,27 @@ void merge(int *arr, int index_low, int index_high)
     int *parr = new int[index_high - index_low + 1];
     int index = 0;
 
-    while (start_a <= end_a && start_b <= end_b)
-    {
-        if (arr[start_a] < arr[start_b])
-        {
+    while (start_a <= end_a && start_b <= end_b) {
+        if (arr[start_a] < arr[start_b]) {
             parr[index++] = arr[start_a++];
-        }
-        else
-        {
+        } else {
             parr[index++] = arr[start_b++];
         }
     }
 
-    while (start_a <= end_a)
-    {
+    while (start_a <= end_a) {
         parr[index++] = arr[start_a++];
     }
 
-    while (start_b <= end_b)
-    {
+    while (start_b <= end_b) {
         parr[index++] = arr[start_b++];
     }
 
-    for (int i = 0; i < index_high - index_low + 1; i++)
-    {
+    for (int i = 0; i < index_high - index_low + 1; i++) {
         arr[index_low + i] = parr[i];
     }
 
-    for (int i = 0; i < index_high - index_low + 1; i++)
-    {
+    for (int i = 0; i < index_high - index_low + 1; i++) {
         printf("%d ", parr[i]);
     }
 
@@ -66,8 +59,7 @@ void merge(int *arr, int index_low, int index_high)
 
 void MergeSort(int arr[], int low, int high)
 {
-    if (low < high)
-    {
+    if (low < high) {
         int mid = (low + high) / 2;
         MergeSort(arr, low, mid);
         MergeSort(arr, mid + 1, high);
@@ -82,9 +74,8 @@ int *mergeSort(int *A, int n)
 }
 int main()
 {
-    int arr[] = { 1, 3, 5, 4, 8, 0, 9 , 6, 4, 3, 5, 6, 34, 2, 34, 554, 6};
+    int arr[] = {1, 3, 5, 4, 8, 0, 9, 6, 4, 3, 5, 6, 34, 2, 34, 554, 6};
     mergeSort(arr, sizeof(arr) / sizeof(int));
     // MergeSort(arr, 0, sizeof(arr) / sizeof(int)-1);
     return 0;
 }
-
