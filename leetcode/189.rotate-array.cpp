@@ -14,10 +14,11 @@
     > Created Time: Sat 03 Aug 2019 03:15:17 AM UTC
  ************************************************************************/
 
+#include <algorithm>
+#include <chrono>
 #include <iostream>
 #include <list>
-#include <chrono>
-#include <algorithm>
+
 #include "common_define.h"
 using namespace std;
 using namespace chrono;
@@ -47,29 +48,25 @@ Could you do it in-place with O(1) extra space?
 
 class Solution
 {
-public:
+   public:
     // solution 1 buff overflow
     void rotate(vector<int> &nums, int k)
     {
-        if (k <= 0)
-        {
+        if (k <= 0) {
             return;
         }
 
         std::list<int> tmplist;
 
-        for (auto &v : nums)
-        {
+        for (auto &v : nums) {
             tmplist.push_back(v);
         }
 
-        if (tmplist.empty())
-        {
+        if (tmplist.empty()) {
             return;
         }
 
-        for (int i = 0; i < k; i++)
-        {
+        for (int i = 0; i < k; i++) {
             int t = tmplist.back();
             tmplist.pop_back();
             tmplist.push_front(t);
@@ -77,8 +74,7 @@ public:
 
         nums.clear();
 
-        for (auto &v : tmplist)
-        {
+        for (auto &v : tmplist) {
             nums.push_back(v);
         }
     }
@@ -105,18 +101,14 @@ int main()
     Solution s;
     std::vector<int> arr{1, 2, 3, 4, 5, 6, 7};
 
-    for (int i = 0; i < 10000000; i++)
-    {
+    for (int i = 0; i < 10000000; i++) {
         arr.push_back(i);
     }
 
     auto start = system_clock::now();
     s.rotate2(arr, 3);
-    auto end   = system_clock::now();
+    auto end = system_clock::now();
     auto duration = duration_cast<microseconds>(end - start);
-    cout <<  "cost"
-         << double(duration.count()) * microseconds::period::num / microseconds::period::den
-         << "秒" << endl;
+    cout << "cost" << double(duration.count()) * microseconds::period::num / microseconds::period::den << "秒" << endl;
     return 0;
 }
-

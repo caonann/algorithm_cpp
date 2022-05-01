@@ -16,49 +16,54 @@ t ，同时又满足 abs(i - j) <= k 。 如果存在则返回 true，不存在�
 #include <iostream>
 #include <map>
 #include <queue>
+#include <set>
 #include <stack>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <assert.h>
 using namespace std;
 
 class Solution
 {
    public:
-   //todo:
+    // todo:整型溢出场景导致没过
+    // c++的map 查询小于 target的最大值喝大于target的最小值
     bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t)
     {
-        map<int, int> map_store;
-        int min = INT_MAX;
+        set<int> set_store;
+        long min = INT_MAX;
         for (int i = 0; i < nums.size(); i++) {
-            auto it = map_store.upper_bound(nums[i]);
-            int upper = it != map_store.end() ? it->first - nums[i] : INT_MAX;
-            if (it != map_store.end()) --it;
-            int lower = it != map_store.end() ? nums[i] - it->first : INT_MAX;
-            cout << "upper " << upper << " lower " << lower << endl;
-            int less = std::min(upper, lower);
-            int min = std::min(min, less);
-            map_store[nums[i]];
-            cout<<"min "<<min<<endl;
+            auto it = set_store.lower_bound(nums[i]);
+            if (it != set_store.end()) {
+                min = std::min(min, labs(nums[i] - *it));
+            }
+
+            if (!set_store.empty()) {
+                auto rit = set_store.rbegin();
+                min = std::min(min, labs(nums[i] - *rit));
+            }
+
             if (min <= t) return true;
-            if (i >= k) map_store.erase(nums[i - k]);
+            if (i >= k && nums[i] != nums[i - k]) set_store.erase(nums[i - k]);
+            set_store.insert(nums[i]);
         }
 
         return false;
     }
 };
 
-bool unit_test(vector<int> arr, int k, int t)
+bool uinttest(vector<int> arr, int k, int t)
 {
     Solution s;
-    vector<int> in{1, 5, 9, 1, 5, 9};
-    return s.containsNearbyAlmostDuplicate(in, k, t);
+    return s.containsNearbyAlmostDuplicate(arr, k, t);
 }
 int main()
-{   
-    auto ret = unit_test(vector<int>{1, 5, 9, 1, 5, 9}, 2, 3);
+{
+    auto ret = uinttest(vector<int>{1, 5, 9, 1, 5, 9}, 2, 3);
     assert(ret == false);
-    unit_test(vector<int>{1,0,1,1},1,2);
+    uinttest(vector<int>{1, 0, 1, 1}, 1, 2);
+    uinttest(vector<int>{1, 2, 3, 1}, 3, 0);
+    uinttest(vector<int>{1, 2, 1, 1}, 1, 0);
+    uinttest(vector<int>{-2147483648, 2147483647}, 1, 1);
     return 0;
 }

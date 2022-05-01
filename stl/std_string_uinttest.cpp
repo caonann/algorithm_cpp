@@ -53,9 +53,15 @@ int main()
     // std::string默认给申请多大内存空间？
     std::string s1;
     size_t capacity = s1.capacity();
-    LOG("capacity %d", capacity);
-    for (int i = 0; i < 10000; i++) {
+    LOG("capacity %ld", capacity);
+    for (int i = 0; i < 1; i++) {
         TestStringDestruct t;
     }
+
+    string s2 = "hello world";
+    auto substr = s2.substr(3, 4);//copy semantic
+    cout << "sub str s2 is :" << substr << endl;
+    std::reverse(substr.begin(), substr.end());
+    cout << "the whole str s2 is :" << s2 << endl;
     return 0;
 }

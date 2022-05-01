@@ -1,9 +1,12 @@
 ## ALGORITHM
 剑指offer专项突击版
 https://leetcode-cn.com/study-plan/lcof/?progress=dj6ns23
+
 https://leetcode-cn.com/problem-list/e8X3pBZi/
+
 一本整理leetcode刷题的书
 LeetCode 101 - A LeetCode Grinding Guide (C++ Version)
+
 牛客专项训练
 https://www.nowcoder.com/study/vod/1
 
