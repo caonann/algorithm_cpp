@@ -31,6 +31,7 @@ bool search(String searchWord) 给定一个字符串 searchWord ，判定能否�
 #include <vector>
 #include "../stl/myTireTree.h"
 using namespace std;
+//todo:
 class MagicDictionary
 {
    public:
