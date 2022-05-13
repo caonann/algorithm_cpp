@@ -23,13 +23,6 @@
 #include <unordered_set>
 #include <vector>
 
-struct TreeNode {
-    int val;
-    struct TreeNode *left;
-    struct TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
-
 #define LOG(...)                                     \
     do {                                             \
         printf("%s line %d:\t", __func__, __LINE__); \
@@ -37,17 +30,23 @@ struct TreeNode {
         printf("\n");                                \
     } while (0)
 
-namespace comm
-{
-
-TreeNode *createTree(std::vector<int> &arr);
-}  // namespace comm
-
 class RandomUtils
 {
    public:
-    static int getInt(int start = 0, int end = INT_MAX);
-    static double getDouble(double start = 0, double end = INT_MAX);
+    static int getInt(int start = 0, int end = INT_MAX)
+    {
+        std::random_device rd;
+        std::default_random_engine e(rd());
+        std::uniform_int_distribution<int> u(start, end);
+        return u(e);
+    }
+    static double getDouble(double start = 0, double end = INT_MAX)
+    {
+        std::random_device rd;
+        std::default_random_engine e(rd());
+        std::uniform_real_distribution<double> u(start, end);
+        return u(e);
+    }
 };
 namespace
 {

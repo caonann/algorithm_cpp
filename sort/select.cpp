@@ -18,19 +18,15 @@
 using namespace std;
 int *selectionSort(int *A, int n)
 {
-    if (n <= 0)
-    {
+    if (n <= 0) {
         return NULL;
     }
 
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         int imax = i;
 
-        for (int j = i + 1; j < n; j++)
-        {
-            if (A[imax] < A[j])
-            {
+        for (int j = i + 1; j < n; j++) {
+            if (A[imax] < A[j]) {
                 imax = j;
             }
         }
@@ -48,11 +44,9 @@ int main()
     int arr[] = {1, 3, 5, 4, 8, 0, 9};
     selectionSort(arr, sizeof(arr) / sizeof(int));
 
-    for (int i = 0; i < sizeof(arr) / sizeof(int); i++)
-    {
+    for (int i = 0; i < sizeof(arr) / sizeof(int); i++) {
         cout << arr[i] << endl;
     }
 
     return 0;
 }
-
