@@ -53,3 +53,26 @@ sword2->niuke->niuke进阶->程序员代码面试指南->程序员面试金典->
 过2天，换一种语言实现 python
 
 过一周，在换一种语言实现 golang
+
+# 其他搜集
+如果问最短，最少，BFS
+
+如果问连通性，静态就是 DFS,BFS，动态就 UF
+
+如果问依赖性就 topo sort
+
+DAG 的问题就 dfs+memo
+
+矩阵和 Array 通常都是 DP
+
+问数量的通常都是 DP
+
+问是否可以，也很有可能 DP
+
+求所有解的，基本 backtracking
+
+排序总是可以想一想的
+
+万事总可以想HashMap
+
+找规律试试Stack
