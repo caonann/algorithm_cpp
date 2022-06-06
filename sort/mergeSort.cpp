@@ -29,7 +29,9 @@ using namespace std;
 class Solution
 {
    public:
-    vector<int> sortArray(vector<int>& nums) {}
+    vector<int> sortArray(vector<int>& nums) {
+        
+    }
 };
 
 //递归归并,这种写法比较容易理解
