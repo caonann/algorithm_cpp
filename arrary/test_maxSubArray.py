@@ -1,6 +1,9 @@
+import functools
+import time
 import unittest
-import time, functools
+
 from arrary.maxSubArray import getMaxSumSection
+
 
 def metric(fn):
     @functools.wraps(fn)

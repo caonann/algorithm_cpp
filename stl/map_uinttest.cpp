@@ -22,12 +22,12 @@ using namespace std;
 
 int main()
 {
-    map<int, string> map_test{{0, "zero"}, {1, "one"}, {3, "three"}, {4, "four"}};
+    map<int, string> map_test{{0, "zero"}, {1, "one"}, {2, "three"}, {4, "four"}};
     auto pair = map_test.equal_range(1);
     // pair.first是{1，"two"},pair.second 是{2，"three"};
-    for (auto it = pair.first; it != pair.second; ++it) {
-        cout << "key " << it->first << " val " << it->second << endl;
-    }
+   
+    cout<<pair.first->first<<" "<<pair.first->second<<endl;
+    cout<<pair.second->first<<" "<<pair.second->second<<endl;
 
     auto it = map_test.lower_bound(2);
     cout << "lower_bound 2 is " << it->first << " val " << it->second << endl;
@@ -36,10 +36,11 @@ int main()
 
     it = map_test.lower_bound(-1);
     if (it == map_test.begin()) cout << "no element " << endl;
-    map<int, int> map_test1;
+    if (it == map_test.end()) cout << "no element end" << endl;
 
+    map<int, int> map_test1;
     map_test1[1];
-    auto it1 = map_test1.lower_bound(2);
+    auto it1 = map_test1.lower_bound(5);
     if (it1 == map_test1.end()) cout << " no such element 2" << endl;
     it1 = map_test1.lower_bound(0);
     if (it1 == map_test1.end()) cout << " no such element 0" << endl;
