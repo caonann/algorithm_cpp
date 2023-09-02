@@ -19,38 +19,34 @@
 #include <unordered_map>
 #include <vector>
 using namespace std;
-class Solution
-{
-   public:
-    //尝试把数组看成包含任意值，用hash存 target-nums[i]
-    vector<int> twoSum(vector<int>& nums, int target)
-    {
-        unordered_map<int, int> hash_map;
-        for (int i = 0; i < nums.size(); i++) {
-            hash_map[target - nums[i]] = i;
-        }
-        vector<int> ans;
-        for (int i = 0; i < nums.size(); i++) {
-            
-            if (hash_map.find(nums[i]) != hash_map.end()) {
-                if (i != hash_map[nums[i]]) {
-                    ans.push_back(nums[i]);
-                    ans.push_back(nums[hash_map[nums[i]]]);
-                    return ans;
-                }
-            }
-        }
-        return ans;
+class Solution {
+ public:
+  // 尝试把数组看成包含任意值，用hash存 target-nums[i]
+  vector<int> twoSum(vector<int> &nums, int target) {
+    unordered_map<int, int> hash_map;
+    for (int i = 0; i < nums.size(); i++) {
+      hash_map[target - nums[i]] = i;
     }
+    vector<int> ans;
+    for (int i = 0; i < nums.size(); i++) {
+      if (hash_map.find(nums[i]) != hash_map.end()) {
+        if (i != hash_map[nums[i]]) {
+          ans.push_back(nums[i]);
+          ans.push_back(nums[hash_map[nums[i]]]);
+          return ans;
+        }
+      }
+    }
+    return ans;
+  }
 };
-int main()
-{
-    Solution s;
-    vector<int> in{6, 18, 27, 40, 46, 57, 59, 66, 72, 91};
-    auto ret = s.twoSum(in, 65);
-    for (auto v : ret) {
-        cout << v << " ";
-    }
-    cout << endl;
-    return 0;
+int main() {
+  Solution s;
+  vector<int> in{6, 18, 27, 40, 46, 57, 59, 66, 72, 91};
+  auto ret = s.twoSum(in, 65);
+  for (auto v : ret) {
+    cout << v << " ";
+  }
+  cout << endl;
+  return 0;
 }

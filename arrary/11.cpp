@@ -7,8 +7,8 @@
  @brief    给定一个二进制数组 nums , 找到含有相同数量的 0 和 1
  的最长连续子数组，并返回该子数组的长度。
 */
-#include <algorithm>
 #include <assert.h>
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <unordered_map>
@@ -16,10 +16,9 @@
 using namespace std;
 
 class Solution {
-public:
+ public:
   int findMaxLength(vector<int> &nums) {
-    unordered_map<int, int> hash_map{
-        {0, -1}}; // 这个初始化逻辑比较特殊，只有头元素需要特殊考虑 -1，1的情况
+    unordered_map<int, int> hash_map{{0, -1}};  // 这个初始化逻辑比较特殊，只有头元素需要特殊考虑 -1，1的情况
     int sum = 0;
     int max_len = 0;
     for (int i = 0; i < nums.size(); i++) {

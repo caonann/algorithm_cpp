@@ -31,7 +31,7 @@ using namespace std;
 */
 
 class Solution {
-public:
+ public:
   int subarraySum(vector<int> &nums, int k) {
     unordered_map<int, int> hash_map;
     int sum = 0;
@@ -56,8 +56,7 @@ public:
     int total_count = 0;
     for (auto num : nums) {
       sum += num;
-      total_count +=
-          hash_map.find(sum - k) != hash_map.end() ? hash_map[sum - k] : 0;
+      total_count += hash_map.find(sum - k) != hash_map.end() ? hash_map[sum - k] : 0;
       hash_map[sum]++;
     }
     return total_count;

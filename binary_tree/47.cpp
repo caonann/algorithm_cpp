@@ -26,26 +26,23 @@ struct TreeNode {
   TreeNode *right;
   TreeNode() : val(0), left(nullptr), right(nullptr) {}
   TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-  TreeNode(int x, TreeNode *left, TreeNode *right)
-      : val(x), left(left), right(right) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
 class Solution {
-public:
+ public:
   // 后序遍历的性质
   TreeNode *pruneTree(TreeNode *root) {
-    if (!root)
-      return nullptr;
+    if (!root) return nullptr;
     root->left = pruneTree(root->left);
     root->right = pruneTree(root->right);
-    if (!root->left && !root->right && root->val == 0)
-      return nullptr;
+    if (!root->left && !root->right && root->val == 0) return nullptr;
     return root;
   }
 };
 
 class Solution1 : public Solution {
-public:
+ public:
   // 非递归
   TreeNode *pruneTree(TreeNode *root) {
     auto cur = root;
@@ -62,13 +59,14 @@ public:
       } else {
         tree_stack.pop();
         if (!cur->left && !cur->right && cur->val == 0) {
-          if (tree_stack.empty())
-            return nullptr;
+          if (tree_stack.empty()) return nullptr;
           auto parent = tree_stack.top();
-          if (parent->left == cur)
+          if (parent->left == cur) {
             parent->left = nullptr;
-          if (parent->right == cur)
+          }
+          if (parent->right == cur) {
             parent->right = nullptr;
+          }
         }
         pre = cur;
         cur = nullptr;

@@ -11,4 +11,3 @@ $(BINARIES):
 
 clean:
 	rm -f $(BINARIES)
-

@@ -23,44 +23,38 @@
 #include <unordered_set>
 #include <vector>
 
-#define LOG(...)                                     \
-    do {                                             \
-        printf("%s line %d:\t", __func__, __LINE__); \
-        printf(__VA_ARGS__);                         \
-        printf("\n");                                \
-    } while (0)
+#define LOG(...)                                                               \
+  do {                                                                         \
+    printf("%s line %d:\t", __func__, __LINE__);                               \
+    printf(__VA_ARGS__);                                                       \
+    printf("\n");                                                              \
+  } while (0)
 
-class RandomUtils
-{
-   public:
-    static int getInt(int start = 0, int end = INT_MAX)
-    {
-        std::random_device rd;
-        std::default_random_engine e(rd());
-        std::uniform_int_distribution<int> u(start, end);
-        return u(e);
-    }
-    static double getDouble(double start = 0, double end = INT_MAX)
-    {
-        std::random_device rd;
-        std::default_random_engine e(rd());
-        std::uniform_real_distribution<double> u(start, end);
-        return u(e);
-    }
+class RandomUtils {
+public:
+  static int getInt(int start = 0, int end = INT_MAX) {
+    std::random_device rd;
+    std::default_random_engine e(rd());
+    std::uniform_int_distribution<int> u(start, end);
+    return u(e);
+  }
+  static double getDouble(double start = 0, double end = INT_MAX) {
+    std::random_device rd;
+    std::default_random_engine e(rd());
+    std::uniform_real_distribution<double> u(start, end);
+    return u(e);
+  }
 };
-namespace
-{
+namespace {
 
-template <typename T>
-void printItemList(T &itemlist)
-{
-    for (auto &v : itemlist) {
-        std::cout << v << " ";
-    }
+template <typename T> void printItemList(T &itemlist) {
+  for (auto &v : itemlist) {
+    std::cout << v << " ";
+  }
 
-    printf("\n");
+  printf("\n");
 }
 
-}  // namespace
+} // namespace
 
 #endif
