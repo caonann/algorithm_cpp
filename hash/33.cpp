@@ -59,6 +59,7 @@ class Solution1 : public Solution {
     }
 
     vector<vector<string>> ans;
+    ans.reserve(hash_map.size());
     for (const auto& item : hash_map) {
       ans.emplace_back(item.second);
     }
