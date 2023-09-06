@@ -22,7 +22,7 @@
 #include <unordered_set>
 #include <vector>
 
-#include "../util/util.h"
+//#include "../util/util.h"
 using namespace std;
 
 class Solution
@@ -47,7 +47,8 @@ class Solution
     {
         int p1 = start - 1;
         // std::swap(nums[start], nums[end]);//这里如果选开头第一个，最坏时间复杂度接近on^2
-        int random = RandomUtils::getInt(start, end);
+        //int random = RandomUtils::getInt(start, end);
+        int random = (start+end)/2;
         std::swap(nums[random], nums[end]);
         for (int p2 = start; p2 < end; p2++) {
             if (nums[p2] < nums[end]) {
@@ -66,6 +67,9 @@ int main()
     vector<int> in{2, 3, 1, 5, 8, 7, 4};
     Solution s;
     auto ret = s.sortArray(in);
-    printItemList(ret);
+    //printItemList(ret);
+    for(auto c:ret){
+      cout<<c<<" "<<endl;
+    }
     return 0;
 }

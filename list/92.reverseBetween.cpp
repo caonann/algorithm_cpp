@@ -30,43 +30,67 @@ struct ListNode {
 };
 
 class Solution {
-public:
+ public:
   ListNode *reverseBetween(ListNode *head, int left, int right) {
-    if (left == right)
+    if (left == right) {
       return head;
+    }
     ListNode dummy(-1000, head);
     ListNode *it = &dummy;
     int step = right - left;
-    auto pre = it;
+    auto *pre = it;
     while (left--) {
       pre = it;
       it = it->next;
     }
-    auto head_cut = it;
+    auto *head_cut = it;
     while (step--) {
       it = it->next;
     }
-    auto tail = it->next;
+    auto *tail = it->next;
     it->next = nullptr;
-    auto new_head = reverse(head_cut);
+    auto *new_head = reverse(head_cut);
     pre->next = new_head;
-    while (new_head->next) {
+    while (new_head->next != nullptr) {
       new_head = new_head->next;
     }
     new_head->next = tail;
     return dummy.next;
   }
 
-private:
+ private:
   ListNode *reverse(ListNode *head) {
     ListNode *pre = nullptr;
-    while (head) {
-      auto next = head->next;
+    while (head != nullptr) {
+      auto *next = head->next;
       head->next = pre;
       pre = head;
       head = next;
     }
     return pre;
+  }
+};
+
+//一次遍历，相比第一种方法，好处是只遍历一次
+class Solution2 {
+ public:
+  ListNode *reverseBetween(ListNode *head, int left, int right) {
+    auto *dummy = new ListNode(-1);
+    dummy->next = head;
+    auto *pre = dummy;
+    for (int i = 0; i < left - 1; ++i) {
+      pre = pre->next;
+    }
+
+    auto *cur = pre->next;
+    ListNode *next;
+    for (int i = 0; i < right - left; i++) {
+      next = cur->next;
+      cur->next = next->next;
+      next->next = pre->next;
+      pre->next = next;
+    }
+    return dummy->next;
   }
 };
 

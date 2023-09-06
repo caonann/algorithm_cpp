@@ -47,7 +47,9 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "list": "cpp",
+        "unordered_set": "cpp"
     },
     "clangd.arguments": [
         "--clang-tidy", // 开启clang-tidy
