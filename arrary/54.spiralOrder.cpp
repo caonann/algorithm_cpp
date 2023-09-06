@@ -6,8 +6,8 @@
  @url      https://leetcode.cn/problems/spiral-matrix/
  @brief
 */
-#include <assert.h>
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <map>
 #include <vector>
