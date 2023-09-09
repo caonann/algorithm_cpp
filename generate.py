@@ -40,8 +40,9 @@ def generate_cpp_file(filename):
  @url      
  @brief  
 */
-#include <assert.h>
-#include <stdio.h>
+#include <cassert>
+#include <climits>
+#include <cstdio>
 
 #include <algorithm>
 #include <bitset>
@@ -56,7 +57,6 @@ def generate_cpp_file(filename):
 #include <unordered_set>
 #include <vector>
 
-#include "../util/util.h"
 using namespace std;
 
 int main(){{
