@@ -23,22 +23,20 @@ using namespace std;
 // todo
 
 // string iterator in for loop ,and delete it
-void uint_test_string()
-{
-    string s = "  hello world this is a test case for a delete in loop ";
-    for (auto it = s.begin(); it != s.end();) {
-        if (*it == ' ') {
-            it = s.erase(it);
-        } else {
-            ++it;
-        }
+void uint_test_string() {
+  string s = "  hello world this is a test case for a delete in loop ";
+  for (auto it = s.begin(); it != s.end();) {
+    if (*it == ' ') {
+      it = s.erase(it);
+    } else {
+      ++it;
     }
+  }
 
-    cout << "after operate the string: " << s << endl;
+  cout << "after operate the string: " << s << endl;
 }
 
-int main()
-{
-    uint_test_string();
-    return 0;
+int main() {
+  uint_test_string();
+  return 0;
 }

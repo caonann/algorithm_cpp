@@ -26,81 +26,74 @@ int add(int val) 将 val 插入数据流 nums 后，返回当前数据流中第 
 #include "../stl/myPriority.h"
 using namespace std;
 
-class KthLargest
-{
-   public:
-    KthLargest(int k, vector<int>& nums) : k_(k), heap_(cmp())
-    {
-        //构建小根堆
-        for (auto n : nums) {
-            add(n);
-        }
+class KthLargest {
+ public:
+  KthLargest(int k, vector<int>& nums) : k_(k), heap_(cmp()) {
+    // 构建小根堆
+    for (auto n : nums) {
+      add(n);
     }
+  }
 
-    int add(int val)
-    {
-        if (heap_.empty() || heap_.size() < k_ || val > heap_.top()) {  //这一行判断其实较为多余
-            heap_.push(val);
-            if (heap_.size() > k_) {
-                heap_.pop();
-            }
-        }
-        return heap_.top();
+  int add(int val) {
+    if (heap_.empty() || heap_.size() < k_ || val > heap_.top()) {  // 这一行判断其实较为多余
+      heap_.push(val);
+      if (heap_.size() > k_) {
+        heap_.pop();
+      }
     }
+    return heap_.top();
+  }
 
-   private:
-    struct cmp {
-        int operator()(int left, int right) { return left > right; }
-    };
+ private:
+  struct cmp {
+    int operator()(int left, int right) { return left > right; }
+  };
 
-    priority_queue<int, vector<int>, cmp> heap_;
-    const int k_;
+  priority_queue<int, vector<int>, cmp> heap_;
+  const int k_;
 };
 
-class KthLargest1 : public KthLargest
-{
-   public:
-    // using KthLargest::KthLargest;
-    KthLargest1(int k, vector<int>& nums) : k_(k), KthLargest(k, nums)
-    {
-        for (auto n : nums) add(n);
-    }
+class KthLargest1 : public KthLargest {
+ public:
+  // using KthLargest::KthLargest;
+  KthLargest1(int k, vector<int>& nums) : k_(k), KthLargest(k, nums) {
+    for (auto n : nums) add(n);
+  }
 
-    int add(int val)
-    {
-        heap_.push(val);
-        if (heap_.size() > k_) {
-            heap_.pop();
-        }
-        return heap_.top();
+  int add(int val) {
+    heap_.push(val);
+    if (heap_.size() > k_) {
+      heap_.pop();
     }
+    return heap_.top();
+  }
 
-   private:
-    const int k_;
-    priority_queue<int, vector<int>, greater<int>> heap_;
+ private:
+  const int k_;
+  priority_queue<int, vector<int>, greater<int>> heap_;
 };
 
-class KthLargest2 : public KthLargest
-{
-   public:
-    // using KthLargest::KthLargest;
-    KthLargest2(int k, vector<int>& nums) : k_(k), KthLargest(k, nums)
-    {
-        for (auto n : nums) add(n);
+class KthLargest2 : public KthLargest {
+ public:
+  // using KthLargest::KthLargest;
+  KthLargest2(int k, vector<int>& nums) : k_(k), KthLargest(k, nums) {
+    for (auto n : nums) {
+      add(n);
     }
+  }
 
-    int add(int val)
-    {
-        heap_.push(val);
-        if (heap_.size() > k_) {
-            heap_.pop();
-        }
-        return heap_.top();
+  int add(int val) {
+    heap_.push(val);
+    if (heap_.size() > k_) {
+      heap_.pop();
     }
+    return heap_.top();
+  }
 
-   private:
-    const int k_;
-    MyPriority heap_;
+ private:
+  const int k_;
+  MyPriority heap_;
 };
 
 /**
@@ -109,28 +102,26 @@ class KthLargest2 : public KthLargest
  * int param_1 = obj->add(val);
  */
 
-void uinttest_myheap()
-{
-    vector<int> in{1, 3, 2, 5, 4, 7, 9, 10};
-    MyPriority heap(in);
+void uinttest_myheap() {
+  vector<int> in{1, 3, 2, 5, 4, 7, 9, 10};
+  MyPriority heap(in);
 
-    cout << "top is " << heap.top() << endl;
-    heap.push(11);
-    cout << "top is " << heap.top() << endl;
-    heap.push(0);
-    cout << "top is " << heap.top() << endl;
-    heap.pop();
-    cout << "top is " << heap.top() << endl;
-    heap.pop();
-    cout << "top is " << heap.top() << endl;
+  cout << "top is " << heap.top() << endl;
+  heap.push(11);
+  cout << "top is " << heap.top() << endl;
+  heap.push(0);
+  cout << "top is " << heap.top() << endl;
+  heap.pop();
+  cout << "top is " << heap.top() << endl;
+  heap.pop();
+  cout << "top is " << heap.top() << endl;
 }
-int main()
-{
-    vector<int> in{1, 3, 2, 5, 4, 7, 9, 10};
-    KthLargest2 s(3, in);
-    assert(7 == s.add(3));
-    assert(9 == s.add(11));
+int main() {
+  vector<int> in{1, 3, 2, 5, 4, 7, 9, 10};
+  KthLargest2 s(3, in);
+  assert(7 == s.add(3));
+  assert(9 == s.add(11));
 
-    // uinttest_myheap();
-    return 0;
+  // uinttest_myheap();
+  return 0;
 }
