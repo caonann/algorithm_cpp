@@ -6,8 +6,8 @@
  @url      https://leetcode-cn.com/problems/wtcaE1/
  @brief   给定一个字符串 s ，请你找出其中不含有重复字符的 最长连续子字符串的长度。
 */
-#include <assert.h>
-#include <stdio.h>
+#include <cassert>
+#include <cstdio>
 
 #include <algorithm>
 #include <iostream>
@@ -38,7 +38,7 @@ class Solution {
   // asii码有最多256个，可以用固定大小的的数组表示
   int lengthOfLongestSubstring1(string s) {
     vector<int> counts(256, 0);
-    //每次都遍历了整个数组，效率不高
+    // 每次都遍历了整个数组，效率不高
     auto is_greater_than1 = [](const vector<int>& counts) -> bool {
       for (const auto& v : counts) {
         if (v > 1) {
@@ -61,8 +61,8 @@ class Solution {
     return max_len;
   }
 
-  //在lengthOfLongestSubstring1的基础上优化掉遍历counts的开销
-  //因为右边每次加入新元素，如果有重复，那必然大于1，于是left右移直到将counts[s[right]]减下去
+  // 在lengthOfLongestSubstring1的基础上优化掉遍历counts的开销
+  // 因为右边每次加入新元素，如果有重复，那必然大于1，于是left右移直到将counts[s[right]]减下去
   int lengthOfLongestSubstring2(string s) {
     vector<int> counts(256, 0);
     int left = -1;

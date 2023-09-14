@@ -13,8 +13,8 @@
 的情况。
 
 */
-#include <assert.h>
-#include <stdio.h>
+#include <cassert>
+#include <cstdio>
 
 #include <algorithm>
 #include <iostream>
@@ -23,8 +23,9 @@
 #include <vector>
 
 using namespace std;
+
 class Solution {
-public:
+ public:
   int evalRPN(vector<string> &tokens) {
     stack<int> stack_store;
     for (const auto &str : tokens) {
@@ -34,21 +35,21 @@ public:
         int num1 = stack_store.top();
         stack_store.pop();
         switch (str[0]) {
-        case '+':
-          stack_store.emplace(num1 + num2);
-          break;
-        case '-':
-          stack_store.emplace(num1 - num2);
-          break;
-        case '*':
-          stack_store.emplace(num1 * num2);
-          break;
-        case '/':
-          assert(num2 != 0);
-          stack_store.emplace(num1 / num2);
-          break;
-        default:
-          break;
+          case '+':
+            stack_store.emplace(num1 + num2);
+            break;
+          case '-':
+            stack_store.emplace(num1 - num2);
+            break;
+          case '*':
+            stack_store.emplace(num1 * num2);
+            break;
+          case '/':
+            assert(num2 != 0);
+            stack_store.emplace(num1 / num2);
+            break;
+          default:
+            break;
         }
       } else {
         stack_store.emplace(stoi(str));
@@ -58,8 +59,7 @@ public:
   }
 };
 int main() {
-  vector<string> in{"10", "6", "9",  "3", "+", "-11", "*",
-                    "/",  "*", "17", "+", "5", "+"};
+  vector<string> in{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
   Solution s;
   int ret = s.evalRPN(in);
   cout << ret << endl;
