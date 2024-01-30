@@ -55,7 +55,8 @@
         "ctime": "cpp",
         "map": "cpp",
         "set": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "queue": "cpp"
     },
     "clangd.arguments": [
         "--clang-tidy", // 开启clang-tidy

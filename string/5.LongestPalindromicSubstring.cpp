@@ -17,7 +17,7 @@ using namespace std;
 
 class Solution {
  public:
-  //中心扩展法
+  // 中心扩展法
   string longestPalindrome(string s) {
     string t = "#";
     for (const auto& c : s) {
@@ -31,7 +31,7 @@ class Solution {
       while (left >= 0 && right < t.length()) {
         if (t[left] == t[right]) {
           if (longest_str.length() < right - left + 1) {
-            longest_str = t.substr(left, right - left + 1);  //每次都有拷贝，是否记住下标索引更好点？
+            longest_str = t.substr(left, right - left + 1);  // 每次都有拷贝，是否记住下标索引更好点？
           }
         } else {
           break;
@@ -46,7 +46,7 @@ class Solution {
     return longest_str;
   }
 
-  //用左右下标记录最大回文子串，减少字符串拷贝
+  // 用左右下标记录最大回文子串，减少字符串拷贝
   string longestPalindrome1(string s) {
     string t = "#";
     for (const auto& c : s) {
@@ -80,7 +80,7 @@ class Solution {
     return longest_str;
   }
 
-  //空间复杂度o(1),不借助额外字符串修改
+  // 空间复杂度o(1),不借助额外字符串修改
   string longestPalindrome2(string s) {
     int max_len = INT_MIN;
     int left_max = 0;
