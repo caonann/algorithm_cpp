@@ -36,7 +36,8 @@ class Solution
    public:
     vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2)
     {
-        int min = INT_MAX, max = INT_MIN;
+        int min = INT_MAX;
+        int max = INT_MIN;
         vector<int> ans;
         for (auto n : arr1) {
             min = std::min(min, n);
